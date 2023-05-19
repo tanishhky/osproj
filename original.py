@@ -67,7 +67,7 @@ def addSong():
 
 root = tkinter.Tk()
 root.title("OS mp3 Player")
-root.geometry("450x450")
+root.geometry("350x450")
 
 pygame.mixer.init()
 
