@@ -5,8 +5,28 @@ from tkinter import Listbox,Menu,Button,Frame,PhotoImage,messagebox,filedialog
 
 dictsongs = {}
 
+def get_next_item(dictionary, current_item):
+    key_iterator = iter(dictionary)
+    keys=list(dictionary.keys())
+    i=keys.index(current_item)
+
+    if i<len(keys)-1:
+        next=keys[i+1] 
+        return next
+    else:
+        return keys[0]                                                                                                                       
+
+def get_prev_item(dictionary, current_item):
+    key_iterator = iter(dictionary)
+    keys=list(dictionary.keys())
+    i=keys.index(current_item)
+
+    if i>1:
+        next=keys[i-1] 
+        return prev
+    else:
+        return keys[len(keys)]                                                                                                                                                                              
 def play():
-    pausePlayBtn.configure(image=pausePlayBtnImg)
     root.title("OS mp3 Player")
     name = listsongs.get(tkinter.ACTIVE)
 
@@ -19,6 +39,7 @@ def play():
             pygame.mixer.music.unpause()
             pausePlayBtn.configure(image=playImg)
             return
+        
 
     try:
         pygame.mixer.music.load(dictsongs[name])
@@ -33,13 +54,25 @@ def play():
     var.set(f"{name[:16]}..." if len(name)>18 else name)
     pygame.mixer.music.play()
 
+def next():
+    new= get_next_item(dictsongs, current.get())
+    pygame.mixer.music.load(dictsongs[new])
+    current.set(new) 
+    var.set(f"{new[:16]}..." if len(new)>18 else new)
+    pygame.mixer.music.play()
+
+def prev():
+    new= get_prev_item(dictsongs, current.get())
+    pygame.mixer.music.load(dictsongs[new])
+    current.set(new) 
+    var.set(f"{new[:16]}..." if len(new)>18 else new)
+    pygame.mixer.music.play()
 
 def showMentor():
     messagebox.showinfo("OUR MENTOR", "Dr. Manikandan V M")
 
 def showContributors():
     messagebox.showinfo("CONTRIBUTORS", "Tanishk Yadav\nSanjana Maini")
-    messagebox.
 
 def addSong():
     initDirectory = filedialog.askdirectory()
@@ -65,6 +98,8 @@ def addSong():
                         listsongs.insert(tkinter.END, file.replace(format, ''))
 
 
+
+
 root = tkinter.Tk()
 root.title("OS mp3 Player")
 root.geometry("350x450")
@@ -82,20 +117,22 @@ for song_name, path in dictsongs.items():
 
 listsongs.pack(pady=4)
 
+#listDirBtnImg = PhotoImage(file='Icons1/pause.png')
 prevBtnImg = PhotoImage(file='Icons1/previous.png')
 pauseImg = PhotoImage(file='Icons1/pause.png')
 playImg = PhotoImage(file='Icons1/play.png')
 fwdBtnImg = PhotoImage(file='Icons1/next-button.png')
-pausePlayBtnImg = PhotoImage(file='Icons1/playpause.png')
+pausePlayBtnImg = PhotoImage(file='Icons1/pause.png')
 
 controllersFrame = Frame(root,bg='white')
 controllersFrame.pack()
 
 listDirBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0,bg='white')
 prevBtn = Button(controllersFrame, image=prevBtnImg, borderwidth=0,bg='white')
-fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0,bg='white')
+fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0,bg='white',command=next)
 pausePlayBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0, command=play,bg='white')
 
+#listDirBtn.grid(row=0, column=0, padx=15)
 prevBtn.grid(row=0, column=0, padx=18)
 fwdBtn.grid(row=0, column=2, padx=18)
 pausePlayBtn.grid(row=0, column=1, padx=18)
