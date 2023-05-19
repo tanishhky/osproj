@@ -6,6 +6,7 @@ from tkinter import Listbox,Menu,Button,Frame,PhotoImage,messagebox,filedialog
 dictsongs = {}
 
 def play():
+    pausePlayBtn.configure(image=pausePlayBtnImg)
     root.title("OS mp3 Player")
     name = listsongs.get(tkinter.ACTIVE)
 
@@ -16,7 +17,7 @@ def play():
             return
         else:
             pygame.mixer.music.unpause()
-            pausePlayBtn.configure(image=pausePlayBtnImg)
+            pausePlayBtn.configure(image=playImg)
             return
 
     try:
@@ -38,6 +39,7 @@ def showMentor():
 
 def showContributors():
     messagebox.showinfo("CONTRIBUTORS", "Tanishk Yadav\nSanjana Maini")
+    messagebox.
 
 def addSong():
     initDirectory = filedialog.askdirectory()
@@ -63,8 +65,6 @@ def addSong():
                         listsongs.insert(tkinter.END, file.replace(format, ''))
 
 
-
-
 root = tkinter.Tk()
 root.title("OS mp3 Player")
 root.geometry("350x450")
@@ -82,12 +82,11 @@ for song_name, path in dictsongs.items():
 
 listsongs.pack(pady=4)
 
-#listDirBtnImg = PhotoImage(file='Icons1/pause.png')
 prevBtnImg = PhotoImage(file='Icons1/previous.png')
 pauseImg = PhotoImage(file='Icons1/pause.png')
 playImg = PhotoImage(file='Icons1/play.png')
 fwdBtnImg = PhotoImage(file='Icons1/next-button.png')
-pausePlayBtnImg = PhotoImage(file='Icons1/pause.png')
+pausePlayBtnImg = PhotoImage(file='Icons1/playpause.png')
 
 controllersFrame = Frame(root,bg='white')
 controllersFrame.pack()
@@ -97,7 +96,6 @@ prevBtn = Button(controllersFrame, image=prevBtnImg, borderwidth=0,bg='white')
 fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0,bg='white')
 pausePlayBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0, command=play,bg='white')
 
-#listDirBtn.grid(row=0, column=0, padx=15)
 prevBtn.grid(row=0, column=0, padx=18)
 fwdBtn.grid(row=0, column=2, padx=18)
 pausePlayBtn.grid(row=0, column=1, padx=18)
