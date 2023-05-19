@@ -12,7 +12,7 @@ def play():
     if current.get()==name:
         if pygame.mixer.music.get_busy():
             pygame.mixer.music.pause()
-            pausePlayBtn.configure(image=listDirBtnImg)
+            pausePlayBtn.configure(image=pauseImg)
             return
         else:
             pygame.mixer.music.unpause()
@@ -81,23 +81,25 @@ for song_name, path in dictsongs.items():
 
 listsongs.pack(pady=4)
 
-listDirBtnImg = PhotoImage(file='Icons1/list.png')
+#listDirBtnImg = PhotoImage(file='Icons1/pause.png')
 prevBtnImg = PhotoImage(file='Icons1/previous.png')
+pauseImg = PhotoImage(file='Icons1/pause.png')
+playImg = PhotoImage(file='Icons1/play.png')
 fwdBtnImg = PhotoImage(file='Icons1/next-button.png')
 pausePlayBtnImg = PhotoImage(file='Icons1/pause.png')
 
 controllersFrame = Frame(root)
 controllersFrame.pack()
 
-listDirBtn = Button(controllersFrame, image=listDirBtnImg, borderwidth=0)
+listDirBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0)
 prevBtn = Button(controllersFrame, image=prevBtnImg, borderwidth=0)
 fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0)
 pausePlayBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0, command=play)
 
-listDirBtn.grid(row=0, column=0, padx=15)
-prevBtn.grid(row=0, column=1, padx=15)
-fwdBtn.grid(row=0, column=3, padx=15)
-pausePlayBtn.grid(row=0, column=2, padx=15)
+#listDirBtn.grid(row=0, column=0, padx=15)
+prevBtn.grid(row=0, column=0, padx=15)
+fwdBtn.grid(row=0, column=2, padx=15)
+pausePlayBtn.grid(row=0, column=1, padx=15)
 
 playermenu = Menu(root)
 root.config(menu=playermenu)
