@@ -67,7 +67,8 @@ def addSong():
 
 root = tkinter.Tk()
 root.title("OS mp3 Player")
-root.geometry("450x450")
+root.geometry("350x450")
+root.configure(bg='black')
 
 pygame.mixer.init()
 
@@ -75,7 +76,7 @@ var = tkinter.StringVar()
 current = tkinter.StringVar()
 var.set("Select the song to play")
 
-listsongs = Listbox(root, bg='red', width=55)
+listsongs = Listbox(root, bg='red', width=40,height=18)
 for song_name, path in dictsongs.items():
     listsongs.insert(0, song_name)
 
@@ -88,20 +89,20 @@ playImg = PhotoImage(file='Icons1/play.png')
 fwdBtnImg = PhotoImage(file='Icons1/next-button.png')
 pausePlayBtnImg = PhotoImage(file='Icons1/pause.png')
 
-controllersFrame = Frame(root)
+controllersFrame = Frame(root,bg='white')
 controllersFrame.pack()
 
-listDirBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0)
-prevBtn = Button(controllersFrame, image=prevBtnImg, borderwidth=0)
-fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0)
-pausePlayBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0, command=play)
+listDirBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0,bg='white')
+prevBtn = Button(controllersFrame, image=prevBtnImg, borderwidth=0,bg='white')
+fwdBtn = Button(controllersFrame, image=fwdBtnImg, borderwidth=0,bg='white')
+pausePlayBtn = Button(controllersFrame, image=pausePlayBtnImg, borderwidth=0, command=play,bg='white')
 
 #listDirBtn.grid(row=0, column=0, padx=15)
-prevBtn.grid(row=0, column=0, padx=15)
-fwdBtn.grid(row=0, column=2, padx=15)
-pausePlayBtn.grid(row=0, column=1, padx=15)
+prevBtn.grid(row=0, column=0, padx=18)
+fwdBtn.grid(row=0, column=2, padx=18)
+pausePlayBtn.grid(row=0, column=1, padx=18)
 
-playermenu = Menu(root)
+playermenu = Menu(root,bg='white')
 root.config(menu=playermenu)
 
 MixMenu = Menu(playermenu)
